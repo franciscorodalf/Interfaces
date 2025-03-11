@@ -1,0 +1,84 @@
+/* Estilo base del botón */
+#aceptarButton {
+    -fx-background-color: #3498DB; /* Azul brillante */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #2980B9;
+    -fx-background-insets: 0; /* Asegura que se aplique correctamente */
+}
+
+/* Cambia de color cuando pasas el mouse */
+#aceptarButton:hover {
+    -fx-background-color: #2980B9;
+}
+
+/* Cambia de color cuando se presiona */
+#aceptarButton:pressed {
+    -fx-background-color: #1F618D;
+    -fx-border-color: #154360;
+    -fx-background-insets: 1; /* Importante para que el cambio sea visible */
+}
+
+/* Agregar una sombra suave al pasar el mouse */
+#aceptarButton:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 8, 0, 0, 2);
+}
+
+/* Reducir la sombra al presionar */
+#aceptarButton:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+}
+
+#buttonAceptarClick {
+    -fx-background-color: #E74C3C; /* Rojo brillante */
+    -fx-text-fill: white;
+    -fx-border-color: #C0392B; /* Rojo más oscuro para el borde */
+    -fx-effect: dropshadow(gaussian, rgba(255,0,0,0.5), 8, 0, 0, 2);
+}
+
+
+/* Estilo base del botón */
+#openRegistrarButton {
+    -fx-background-color: #3498DB; /* Azul brillante */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #2980B9;
+    -fx-background-insets: 0; /* Asegura que se aplique correctamente */
+}
+
+/* Cambia de color cuando pasas el mouse */
+#openRegistrarButton:hover {
+    -fx-background-color: #2980B9;
+}
+
+/* Cambia de color cuando se presiona */
+#openRegistrarButton:pressed {
+    -fx-background-color: #1F618D;
+    -fx-border-color: #154360;
+    -fx-background-insets: 1; /* Importante para que el cambio sea visible */
+}
+
+/* Agregar una sombra suave al pasar el mouse */
+#openRegistrarButton:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 8, 0, 0, 2);
+}
+
+/* Reducir la sombra al presionar */
+#openRegistrarButton:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+}
+
+#buttonOpenRegistrarClick {
+    -fx-background-color: #E74C3C; /* Rojo brillante */
+    -fx-text-fill: white;
+    -fx-border-color: #C0392B; /* Rojo más oscuro para el borde */
+    -fx-effect: dropshadow(gaussian, rgba(255,0,0,0.5), 8, 0, 0, 2);
+}
