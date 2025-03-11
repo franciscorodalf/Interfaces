@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
@@ -16,7 +17,7 @@
       <font>
          <Font size="14.0" />
       </font></Text>
-   <TextField fx:id="textFieldUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" text="aliufsaiuhsf" />
+   <TextField fx:id="textFieldUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" />
    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
       <font>
          <Font size="14.0" />
@@ -30,5 +31,9 @@
       <font>
          <Font size="18.0" />
       </font></Text>
-   <Button fx:id="openRegistrarButton" mnemonicParsing="false" onAction="#openRegistrarClick" onMouseClicked="#buttonOpenRegistrarClick" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #3498DB;" stylesheets="@../../../Css/buttonLoginAceptar.css" text="Open Registrar" />
+   <Button fx:id="openRegistrarButton" mnemonicParsing="false" onAction="#openRegistrarClick" onMouseClicked="#buttonOpenRegistrarClick" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #3498DB;" text="Open Registrar">
+      <stylesheets>
+         <URL value="@../../../Css/buttonLoginAceptar.css" />
+         <URL value="@../../../Css/buttonLoginAceptar.css" />
+      </stylesheets></Button>
 </VBox>

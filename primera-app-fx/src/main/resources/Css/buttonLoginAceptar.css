@@ -1,6 +1,6 @@
 /* Estilo base del botón */
 #aceptarButton {
-    -fx-background-color: #3498DB; /* Azul brillante */
+    -fx-background-color: #3498DB;
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -8,7 +8,7 @@
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-border-color: #2980B9;
-    -fx-background-insets: 0; /* Asegura que se aplique correctamente */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 2, 2);
 }
 
 /* Cambia de color cuando pasas el mouse */
@@ -21,6 +21,7 @@
     -fx-background-color: #1F618D;
     -fx-border-color: #154360;
     -fx-background-insets: 1; /* Importante para que el cambio sea visible */
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 2, 2);
 }
 
 /* Agregar una sombra suave al pasar el mouse */
@@ -52,6 +53,7 @@
     -fx-background-radius: 5px;
     -fx-border-color: #2980B9;
     -fx-background-insets: 0; /* Asegura que se aplique correctamente */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 2, 2);
 }
 
 /* Cambia de color cuando pasas el mouse */
