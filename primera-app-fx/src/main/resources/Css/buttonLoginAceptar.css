@@ -20,67 +20,186 @@
 #aceptarButton:pressed {
     -fx-background-color: #1F618D;
     -fx-border-color: #154360;
-    -fx-background-insets: 1; /* Importante para que el cambio sea visible */
+    -fx-background-insets: 1;
+    /* Importante para que el cambio sea visible */
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 2, 2);
 }
 
 /* Agregar una sombra suave al pasar el mouse */
 #aceptarButton:hover {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 8, 0, 0, 2);
 }
 
 /* Reducir la sombra al presionar */
 #aceptarButton:pressed {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
 }
 
 #buttonAceptarClick {
-    -fx-background-color: #E74C3C; /* Rojo brillante */
+    -fx-background-color: #E74C3C;
+    /* Rojo brillante */
     -fx-text-fill: white;
-    -fx-border-color: #C0392B; /* Rojo más oscuro para el borde */
-    -fx-effect: dropshadow(gaussian, rgba(255,0,0,0.5), 8, 0, 0, 2);
+    -fx-border-color: #C0392B;
+    /* Rojo más oscuro para el borde */
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.5), 8, 0, 0, 2);
 }
 
 
 /* Estilo base del botón */
 #openRegistrarButton {
-    -fx-background-color: #3498DB; /* Azul brillante */
-    -fx-text-fill: white;
+    background-color: #3498DB;
+    /* Azul brillante */
+    text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-padding: 8px 16px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-border-color: #2980B9;
-    -fx-background-insets: 0; /* Asegura que se aplique correctamente */
+    -fx-background-insets: 0;
+    /* Asegura que se aplique correctamente */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 2, 2);
 }
 
 /* Cambia de color cuando pasas el mouse */
 #openRegistrarButton:hover {
-    -fx-background-color: #2980B9;
+    background-color: #2980B9;
 }
 
 /* Cambia de color cuando se presiona */
 #openRegistrarButton:pressed {
-    -fx-background-color: #1F618D;
-    -fx-border-color: #154360;
-    -fx-background-insets: 1; /* Importante para que el cambio sea visible */
+    background-color: #1F618D;
+    border-color: #154360;
+    -fx-background-insets: 1;
+    /* Importante para que el cambio sea visible */
 }
 
 /* Agregar una sombra suave al pasar el mouse */
 #openRegistrarButton:hover {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 8, 0, 0, 2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 8, 0, 0, 2);
 }
 
 /* Reducir la sombra al presionar */
 #openRegistrarButton:pressed {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
 }
 
 #buttonOpenRegistrarClick {
-    -fx-background-color: #E74C3C; /* Rojo brillante */
+    background-color: #E74C3C;
+    /* Rojo brillante */
     -fx-text-fill: white;
-    -fx-border-color: #C0392B; /* Rojo más oscuro para el borde */
-    -fx-effect: dropshadow(gaussian, rgba(255,0,0,0.5), 8, 0, 0, 2);
+    border-color: #C0392B;
+    /* Rojo más oscuro para el borde */
+    -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.5), 8, 0, 0, 2);
+}
+
+
+/** PESTAÑA DE REGISTRO ---------------
+
+/* Fondo general */
+.root {
+    -fx-background-color: #ECF0F1; /* Gris claro */
+}
+
+/* Panel del formulario */
+.panel {
+    -fx-background-color: #E0E4E7; /* Gris más oscuro para resaltar */
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 5, 5);
+}
+
+/* Estilo para etiquetas de texto */
+#textoUsuario,
+#textoContrasenia,
+#textoRepetirContrasenia {
+    -fx-text-fill: #2C3E50; /* Azul oscuro */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Campos de entrada (Usuario, Contraseña, Repetir Contraseña) */
+.text-field,
+.password-field {
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 2px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+/* Efecto cuando los campos son seleccionados */
+.text-field:focused,
+.password-field:focused {
+    -fx-border-color: #3498DB; /* Azul brillante */
+    -fx-effect: dropshadow(gaussian, rgba(52, 152, 219, 0.5), 6, 0, 2, 2);
+}
+
+/* Botón Registrar */
+#buttonRegistrar {
+    -fx-background-color: #2ECC71; /* Verde esmeralda */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-color: #27AE60;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 3, 3);
+}
+
+/* Cambio de color al pasar el mouse */
+#buttonRegistrar:hover {
+    -fx-background-color: #27AE60;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 3, 3);
+}
+
+/* Efecto al presionar */
+#buttonRegistrar:pressed {
+    -fx-background-color: #1E8449;
+    -fx-border-color: #145A32;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 3, 3);
+}
+
+/* Efecto de aumento al pasar el mouse */
+#buttonRegistrar:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+}
+
+/* Estilo para el elemento con ID "aniadir" */
+#aniadir {
+    -fx-background-color: #F1C40F; /* Amarillo dorado */
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #D4AC0D;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);
+}
+
+/* Cambio de color al pasar el mouse */
+#aniadir:hover {
+    -fx-background-color: #D4AC0D;
+}
+
+/* Efecto de "presionado" */
+#aniadir:pressed {
+    -fx-background-color: #B7950B;
+    -fx-border-color: #7D6608;
+}
+
+#textMensaje {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
 }

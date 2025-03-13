@@ -32,35 +32,26 @@ public class LoginController {
 
     @FXML
     protected void onLoginButtonClick() {
+        boolean esInvalido = textFieldUsuario == null || textFieldUsuario.getText().isEmpty() ||
+                textFieldPassword == null || textFieldPassword.getText().isEmpty() ||
+                !textFieldUsuario.getText().equals(usuario) ||
+                !textFieldPassword.getText().equals(password);
 
-        if (textFieldUsuario == null || textFieldUsuario.getText().isEmpty() ||
-                textFieldPassword == null || textFieldPassword.getText().isEmpty()) {
-            textFieldMensaje.setText("Credenciales null o vacias");
-            return;
-        }
-
-        if (!textFieldUsuario.getText().equals(usuario) || !textFieldPassword.getText().equals(password)) {
-            textFieldMensaje.setText("Credenciales invalidas");
+        if (esInvalido) {
+            textFieldMensaje.setText("Credenciales inválidas");
+            textFieldMensaje.setStyle("-fx-text-fill: red;"); // Texto en rojo
+            aceptarButton.setStyle("-fx-background-color: red; -fx-text-fill: white;"); // Botón en rojo con texto
+                                                                                        // blanco
             return;
         }
 
         textFieldMensaje.setText("Usuario validado correctamente");
+        textFieldMensaje.setStyle("-fx-text-fill: green;"); // Texto en verde
+        aceptarButton.setStyle("-fx-background-color: green; -fx-text-fill: white;"); // Botón en verde con texto blanco
     }
 
-    @FXML
-    public void buttonAceptarClick(MouseEvent event) {
-        aceptarButton.setStyle("-fx-background-color: #E74C3C;"); 
-    }
-    @FXML
-    public void buttonOpenRegistrarClick(MouseEvent event) {
-        aceptarButton.setStyle("-fx-background-color: #E74C3C;"); 
-    }
-    
-    
-    
     @FXML
     protected void openRegistrarClick() {
-
         try {
             Stage stage = (Stage) openRegistrarButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("registro.fxml"));

@@ -6,16 +6,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox alignment="CENTER" prefHeight="498.0" prefWidth="434.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.RegistroController">
+<VBox alignment="CENTER" prefHeight="648.0" prefWidth="330.0" spacing="20.0" style="-fx-background-color: #ECF0F1;;" styleClass="panel" stylesheets="@../../../Css/buttonLoginAceptar.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.RegistroController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
-      <TextField fx:id="textFiledUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="24.0" prefWidth="332.0" />
+      <TextField fx:id="textoUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" stylesheets="@../../../Css/buttonLoginAceptar.css" />
       <Text fx:id="textMensaje1" layoutX="213.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <PasswordField fx:id="textFieldPassword" maxHeight="-Infinity" maxWidth="-Infinity" promptText="introducir password" />
+      <PasswordField fx:id="textoContrasenia" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" stylesheets="@../../../Css/buttonLoginAceptar.css" />
       <Text fx:id="textMensaje2" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Password" />
-      <PasswordField fx:id="textFieldPasswordRepit" maxHeight="-Infinity" maxWidth="-Infinity" promptText="repetir password" />
+      <PasswordField fx:id="textoRepetirContrasenia" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" />
+      <Text fx:id="textMensaje21" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" />
+      <TextField fx:id="textoGmail" maxWidth="-Infinity" prefHeight="37.0" prefWidth="210.0" />
+      <Text fx:id="textMensaje211" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Email" />
+      <TextField fx:id="textoRepetirGmail" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="210.0" />
       <Text fx:id="textMensaje" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Button fx:id="buttonRegistrar" mnemonicParsing="false" text="Registrar" />
+      <Button fx:id="buttonAceptar" mnemonicParsing="false" onAction="#onClickRegistrar" prefHeight="38.0" prefWidth="101.0" stylesheets="@../../../Css/buttonLoginAceptar.css" text="Aceptar" />
    </children>
 </VBox>
