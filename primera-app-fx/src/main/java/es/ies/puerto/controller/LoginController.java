@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -29,6 +28,8 @@ public class LoginController {
     private Button aceptarButton;
     @FXML
     private Button openRegistrarButton;
+    @FXML
+    private Button buttonRecuperarContraseña;
 
     @FXML
     protected void onLoginButtonClick() {
@@ -55,6 +56,22 @@ public class LoginController {
         try {
             Stage stage = (Stage) openRegistrarButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("registro.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 820, 640);
+            stage.setTitle("Pantalla Registro");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @FXML
+    protected void buttonRecuperarContraseñaClick() {
+        try {
+            Stage stage = (Stage) buttonRecuperarContraseña.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("recuperarContraseña.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 820, 640);
             stage.setTitle("Pantalla Registro");
             stage.setScene(scene);
