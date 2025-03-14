@@ -1,10 +1,9 @@
 package es.ies.puerto.controller;
 
 import es.ies.puerto.model.Usuario;
+import es.ies.puerto.model.GestorUsuarios;
 
 import java.io.IOException;
-
-import es.ies.puerto.model.GestorUsuarios;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,38 +33,35 @@ public class RegistroController {
         String contraseña = textoContrasenia.getText().trim();
         String repetirContraseña = textoRepetirContrasenia.getText().trim();
 
-        // Validaciones
         if (usuario.isEmpty() || email.isEmpty() || contraseña.isEmpty() || repetirContraseña.isEmpty()) {
-            textMensaje.setText("⚠️ Todos los campos son obligatorios.");
-            textMensaje.setStyle("-fx-fill: red;");
-            textMensaje.setVisible(true);
+            mostrarMensaje("⚠️ Todos los campos son obligatorios.", "red");
             return;
         }
         if (!contraseña.equals(repetirContraseña)) {
-            textMensaje.setText("⚠️ Las contraseñas no coinciden.");
-            textMensaje.setStyle("-fx-fill: red;");
-            textMensaje.setVisible(true);
+            mostrarMensaje("⚠️ Las contraseñas no coinciden.", "red");
             return;
         }
 
-        // Guardar usuario en JSON
         Usuario nuevoUsuario = new Usuario(usuario, email, contraseña);
         boolean registrado = GestorUsuarios.agregarUsuario(nuevoUsuario);
 
         if (registrado) {
-            textMensaje.setText("✅ Registro exitoso.");
-            textMensaje.setStyle("-fx-fill: green;");
+            mostrarMensaje("✅ Registro exitoso.", "green");
         } else {
-            textMensaje.setText("⚠️ Usuario ya registrado.");
-            textMensaje.setStyle("-fx-fill: red;");
+            mostrarMensaje("⚠️ Usuario ya registrado.", "red");
         }
+    }
+
+    private void mostrarMensaje(String mensaje, String color) {
+        textMensaje.setText(mensaje);
+        textMensaje.setStyle("-fx-fill: " + color + ";");
         textMensaje.setVisible(true);
     }
 
     @FXML
     private void onClickVolverLogin(ActionEvent event) {
         try {
-            System.out.println("Volviendo a la pantalla de login...");
+            System.out.println("🔄 Volviendo a la pantalla de login...");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 
@@ -74,9 +70,8 @@ public class RegistroController {
             stage.setTitle("Login");
             stage.show();
         } catch (IOException e) {
-            System.out.println("Error al volver a la pantalla de login: " + e.getMessage());
+            System.err.println("❌ Error al volver a la pantalla de login: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
 }

@@ -41,12 +41,10 @@ public class RecuperarContraseniaController {
     private void clickButtonRecuperar() {
         String correo = textoCorreo.getText().trim();
 
-        // Ocultar todos los mensajes antes de iniciar la validación
         textoErrorContraseña.setVisible(false);
         tickConfirmacion.setVisible(false);
         loadingIndicator.setVisible(false);
 
-        // Si el campo está vacío
         if (correo.isEmpty()) {
             textoErrorContraseña.setText("⚠️ El campo de correo no puede estar vacío.");
             textoErrorContraseña.setStyle("-fx-fill: red;");
@@ -54,7 +52,6 @@ public class RecuperarContraseniaController {
             return;
         }
 
-        // Validar que el correo tiene el formato correcto
         if (!GMAIL_PATTERN.matcher(correo).matches()) {
             textoErrorContraseña.setText("⚠️ Introduzca un correo Gmail válido.");
             textoErrorContraseña.setStyle("-fx-fill: red;");
@@ -62,15 +59,12 @@ public class RecuperarContraseniaController {
             return;
         }
 
-        // ✔️ Mostrar solo la confirmación y ocultar el mensaje de error
         tickConfirmacion.setText("✔️ Correo enviado correctamente.");
         tickConfirmacion.setStyle("-fx-fill: green;");
         tickConfirmacion.setVisible(true);
 
-        // Activar el indicador de carga (opcional)
         loadingIndicator.setVisible(true);
 
-        // Iniciar temporizador de 4 segundos antes de redirigir
         PauseTransition delay = new PauseTransition(Duration.seconds(4));
         delay.setOnFinished(event -> redirigirARecuperacion());
         delay.play();

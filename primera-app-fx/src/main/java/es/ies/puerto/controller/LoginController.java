@@ -37,7 +37,6 @@ public class LoginController {
             return;
         }
 
-        // Validar credenciales con JSON
         if (GestorUsuarios.validarUsuario(usuario, password)) {
             textFieldMensaje.setText("✅ Bienvenido, " + usuario + ".");
             textFieldMensaje.setStyle("-fx-text-fill: green;");

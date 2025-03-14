@@ -1,27 +1,30 @@
 package es.ies.puerto.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
 
-public class Usuario {
+@JsonIgnoreProperties(ignoreUnknown = true) 
+public class Usuario implements Serializable {
+
+    @JsonProperty("usuario") 
     private String usuario;
+
+    @JsonProperty("email")
     private String email;
+
+    @JsonProperty("contraseña")
     private String contraseña;
 
-    // 🔹 Constructor vacío requerido por Jackson
-    public Usuario() {}
+    public Usuario() {
+    }
 
-    // 🔹 Constructor con parámetros para crear usuarios
-    @JsonCreator
-    public Usuario(@JsonProperty("usuario") String usuario,
-                   @JsonProperty("email") String email,
-                   @JsonProperty("contraseña") String contraseña) {
+    public Usuario(String usuario, String email, String contraseña) {
         this.usuario = usuario;
         this.email = email;
         this.contraseña = contraseña;
     }
 
-    // 🔹 Getters y Setters
     public String getUsuario() {
         return usuario;
     }
@@ -44,5 +47,14 @@ public class Usuario {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "usuario='" + usuario + '\'' +
+                ", email='" + email + '\'' +
+                ", contraseña='" + contraseña + '\'' +
+                '}';
     }
 }
