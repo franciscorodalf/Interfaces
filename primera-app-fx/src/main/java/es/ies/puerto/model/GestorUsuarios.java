@@ -30,15 +30,22 @@ public class GestorUsuarios {
 
     public static boolean validarUsuario(String usuario, String password) {
         List<Usuario> usuarios = leerUsuarios();
-        return usuarios.stream().anyMatch(u -> u.getUsuario().equals(usuario) && u.getContraseña().equals(password));
+        for (Usuario u : usuarios) {
+            if (u.getUsuario().equals(usuario) && u.getContraseña().equals(password)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean agregarUsuario(Usuario nuevoUsuario) {
         List<Usuario> usuarios = leerUsuarios();
 
-        if (usuarios.stream().anyMatch(u -> u.getUsuario().equals(nuevoUsuario.getUsuario()))) {
-            System.out.println("⚠️ Usuario ya registrado.");
-            return false;
+        for (Usuario u : usuarios) {
+            if (u.getUsuario().equals(nuevoUsuario.getUsuario())) {
+                System.out.println("⚠️ Usuario ya registrado.");
+                return false;
+            }
         }
 
         usuarios.add(nuevoUsuario);
@@ -46,8 +53,8 @@ public class GestorUsuarios {
     }
 
     private static boolean guardarUsuarios(List<Usuario> usuarios) {
-        try (Writer writer = new FileWriter(ARCHIVO_JSON)) {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(writer, usuarios);
+        try (FileWriter writer = new FileWriter(ARCHIVO_JSON)) {
+            objectMapper.writeValue(writer, usuarios);
             return true;
         } catch (IOException e) {
             System.err.println("❌ Error al guardar usuarios en JSON: " + e.getMessage());
@@ -55,17 +62,17 @@ public class GestorUsuarios {
             return false;
         }
     }
+
     public static boolean actualizarContrasenia(String usuario, String nuevaContrasenia) {
         List<Usuario> usuarios = leerUsuarios();
-    
+
         for (Usuario u : usuarios) {
             if (u.getUsuario().equals(usuario)) {
-                u.setContraseña(nuevaContrasenia);  
-                return guardarUsuarios(usuarios);  
+                u.setContraseña(nuevaContrasenia);
+                return guardarUsuarios(usuarios);
             }
         }
-    
         return false;
     }
-    
+
 }

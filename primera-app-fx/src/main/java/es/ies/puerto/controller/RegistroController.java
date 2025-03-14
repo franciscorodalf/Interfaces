@@ -61,7 +61,7 @@ public class RegistroController {
     @FXML
     private void onClickVolverLogin(ActionEvent event) {
         try {
-            System.out.println("🔄 Volviendo a la pantalla de login...");
+            System.out.println("Volviendo a la pantalla de login...");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 

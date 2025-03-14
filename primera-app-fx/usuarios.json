@@ -1,5 +1,12 @@
-[ {
-  "usuario" : "Pedro",
-  "email" : "hola@gmail.com",
-  "contraseña" : "123"
-} ]
+[
+    {
+        "usuario": "Pedro",
+        "email": "hola@gmail.com",
+        "contraseña": "123"
+    },
+    {
+        "usuario": "Fran",
+        "email": "ejemplo@gmail.com",
+        "contraseña": "hola"
+    }
+]
