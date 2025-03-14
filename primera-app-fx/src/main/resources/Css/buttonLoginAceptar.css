@@ -95,30 +95,37 @@
 
 /* Estilo base del botón */
 #buttonRecuperarContraseña {
-    -fx-background-color: transparent; /* Fondo transparente */
-    -fx-border-color: #3498DB; /* Borde azul brillante */
+    -fx-background-color: transparent;
+    /* Fondo transparente */
+    -fx-border-color: #3498DB;
+    /* Borde azul brillante */
     -fx-border-width: 2px;
-    -fx-text-fill: #3498DB; /* Texto azul */
+    -fx-text-fill: #3498DB;
+    /* Texto azul */
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-padding: 6px 12px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
-    -fx-cursor: hand; /* Cursor de mano */
+    -fx-cursor: hand;
+    /* Cursor de mano */
     -fx-transition: 0.3s;
 }
 
 /* Efecto al pasar el mouse */
 #buttonRecuperarContraseña:hover {
-    -fx-background-color: #3498DB; /* Azul brillante */
-    -fx-text-fill: white; /* Texto blanco */
+    -fx-background-color: #3498DB;
+    /* Azul brillante */
+    -fx-text-fill: white;
+    /* Texto blanco */
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
 
 /* Efecto al hacer clic */
 #buttonRecuperarContraseña:pressed {
-    -fx-background-color: #1E76B8; /* Azul más oscuro */
+    -fx-background-color: #1E76B8;
+    /* Azul más oscuro */
     -fx-border-color: #1E76B8;
     -fx-scale-x: 1;
     -fx-scale-y: 1;
@@ -128,12 +135,14 @@
 
 /* Fondo general */
 .root {
-    -fx-background-color: #ECF0F1; /* Gris claro */
+    -fx-background-color: #ECF0F1;
+    /* Gris claro */
 }
 
 /* Panel del formulario */
 .panel {
-    -fx-background-color: #E0E4E7; /* Gris más oscuro para resaltar */
+    -fx-background-color: #E0E4E7;
+    /* Gris más oscuro para resaltar */
     -fx-border-radius: 15px;
     -fx-background-radius: 15px;
     -fx-border-color: #BDC3C7;
@@ -146,7 +155,8 @@
 #textoUsuario,
 #textoContrasenia,
 #textoRepetirContrasenia {
-    -fx-text-fill: #2C3E50; /* Azul oscuro */
+    -fx-text-fill: #2C3E50;
+    /* Azul oscuro */
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
@@ -166,13 +176,15 @@
 /* Efecto cuando los campos son seleccionados */
 .text-field:focused,
 .password-field:focused {
-    -fx-border-color: #3498DB; /* Azul brillante */
+    -fx-border-color: #3498DB;
+    /* Azul brillante */
     -fx-effect: dropshadow(gaussian, rgba(52, 152, 219, 0.5), 6, 0, 2, 2);
 }
 
 /* Botón Registrar */
 #buttonRegistrar {
-    -fx-background-color: #2ECC71; /* Verde esmeralda */
+    -fx-background-color: #2ECC71;
+    /* Verde esmeralda */
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -205,7 +217,8 @@
 
 /* Estilo para el elemento con ID "aniadir" */
 #aniadir {
-    -fx-background-color: #F1C40F; /* Amarillo dorado */
+    -fx-background-color: #F1C40F;
+    /* Amarillo dorado */
     -fx-text-fill: black;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -231,4 +244,95 @@
     -fx-font-weight: bold;
     -fx-font-size: 14px;
     -fx-padding: 5px;
+}
+
+
+
+
+
+/** RECUPERAR CONTRASEÑA---------------------------------------------------------
+
+/* Fondo de la pantalla */
+.pantalla-recuperar {
+    -fx-background-color: #0f3357;
+    /* Azul oscuro elegante */
+}
+
+/* Panel principal */
+.panel-recuperar {
+    -fx-background-color: #ECF0F1;
+    /* Fondo claro */
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 4, 4);
+}
+
+/* Estilo para etiquetas */
+.label {
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Campos de entrada */
+.text-field {
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #BDC3C7;
+    -fx-border-width: 1.5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Efecto cuando los campos son seleccionados */
+.text-field:focused {
+    -fx-border-color: #3498DB;
+    /* Azul brillante */
+    -fx-effect: dropshadow(gaussian, rgba(52, 152, 219, 0.5), 5, 0, 2, 2);
+}
+
+/* Botón principal (Recuperar) */
+.boton-recuperar {
+    -fx-background-color: #3498DB;
+    /* Azul brillante */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #1E76B8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);
+}
+
+/* Cambio de color al pasar el mouse */
+.boton-recuperar:hover {
+    -fx-background-color: #1E76B8;
+}
+
+/* Botón secundario (Volver) */
+.boton-volver {
+    -fx-background-color: transparent;
+    -fx-border-color: #3498DB;
+    -fx-border-width: 2px;
+    -fx-text-fill: #3498DB;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 6px 12px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-transition: 0.3s;
+}
+
+/* Cambio al pasar el mouse */
+.boton-volver:hover {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }

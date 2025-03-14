@@ -31,5 +31,5 @@
       <font>
          <Font size="18.0" />
       </font></Text>
-   <Button fx:id="buttonRecuperarContraseña" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#buttonRecuperarContraseñaClick" prefHeight="33.0" prefWidth="160.0" text="Recuperar contraseña" />
+      <Button fx:id="buttonRecuperarContraseña" text="¿Olvidaste tu contraseña?" onAction="#buttonRecuperarContraseñaClick" />
 </VBox>

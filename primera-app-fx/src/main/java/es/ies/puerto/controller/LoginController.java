@@ -1,8 +1,13 @@
 package es.ies.puerto.controller;
 
+import java.io.IOException;
+
 import es.ies.puerto.PrincipalApplication;
+import es.ies.puerto.model.GestorUsuarios;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -12,43 +17,35 @@ import javafx.stage.Stage;
 
 public class LoginController {
 
-    private final String usuario = "pokemon";
-    private final String password = "pokemon";
-
-    @FXML
-    private TextField textFieldUsuario;
-
-    @FXML
-    private PasswordField textFieldPassword;
-
-    @FXML
-    private Text textFieldMensaje;
-
-    @FXML
-    private Button aceptarButton;
-    @FXML
-    private Button openRegistrarButton;
-    @FXML
-    private Button buttonRecuperarContraseña;
+    @FXML private TextField textFieldUsuario;
+    @FXML private PasswordField textFieldPassword;
+    @FXML private Text textFieldMensaje;
+    @FXML private Button aceptarButton;
+    @FXML private Button openRegistrarButton;
+    @FXML private Button buttonRecuperarContraseña;
 
     @FXML
     protected void onLoginButtonClick() {
-        boolean esInvalido = textFieldUsuario == null || textFieldUsuario.getText().isEmpty() ||
-                textFieldPassword == null || textFieldPassword.getText().isEmpty() ||
-                !textFieldUsuario.getText().equals(usuario) ||
-                !textFieldPassword.getText().equals(password);
+        String usuario = textFieldUsuario.getText().trim();
+        String password = textFieldPassword.getText().trim();
 
-        if (esInvalido) {
-            textFieldMensaje.setText("Credenciales inválidas");
-            textFieldMensaje.setStyle("-fx-text-fill: red;"); // Texto en rojo
-            aceptarButton.setStyle("-fx-background-color: red; -fx-text-fill: white;"); // Botón en rojo con texto
-                                                                                        // blanco
+        // Verifica si los campos están vacíos
+        if (usuario.isEmpty() || password.isEmpty()) {
+            textFieldMensaje.setText("⚠️ Todos los campos son obligatorios.");
+            textFieldMensaje.setStyle("-fx-text-fill: red;");
+            textFieldMensaje.setVisible(true);
             return;
         }
 
-        textFieldMensaje.setText("Usuario validado correctamente");
-        textFieldMensaje.setStyle("-fx-text-fill: green;"); // Texto en verde
-        aceptarButton.setStyle("-fx-background-color: green; -fx-text-fill: white;"); // Botón en verde con texto blanco
+        // Validar credenciales con JSON
+        if (GestorUsuarios.validarUsuario(usuario, password)) {
+            textFieldMensaje.setText("✅ Bienvenido, " + usuario + ".");
+            textFieldMensaje.setStyle("-fx-text-fill: green;");
+        } else {
+            textFieldMensaje.setText("❌ Usuario o contraseña incorrectos.");
+            textFieldMensaje.setStyle("-fx-text-fill: red;");
+        }
+        textFieldMensaje.setVisible(true);
     }
 
     @FXML
@@ -63,23 +60,22 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 
     @FXML
-    protected void buttonRecuperarContraseñaClick() {
+    private void buttonRecuperarContraseñaClick(ActionEvent event) {
         try {
-            Stage stage = (Stage) buttonRecuperarContraseña.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("recuperarContraseña.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 820, 640);
-            stage.setTitle("Pantalla Registro");
+            System.out.println("Abriendo pantalla de recuperar contraseña...");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/recuperarContrasenia.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 500, 400);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
+            stage.setTitle("Recuperar Contraseña");
             stage.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.out.println("Error al cambiar a la pantalla de recuperación de contraseña: " + e.getMessage());
             e.printStackTrace();
         }
-
     }
-
 }

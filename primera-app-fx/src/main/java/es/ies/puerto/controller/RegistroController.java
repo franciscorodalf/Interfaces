@@ -1,106 +1,82 @@
 package es.ies.puerto.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
+import es.ies.puerto.model.Usuario;
 
-import es.ies.puerto.PrincipalApplication;
+import java.io.IOException;
+
+import es.ies.puerto.model.GestorUsuarios;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class RegistroController {
-
     @FXML
     private TextField textoUsuario;
     @FXML
     private TextField textoGmail;
-    @FXML
-    private TextField textoRepetirGmail;
     @FXML
     private PasswordField textoContrasenia;
     @FXML
     private PasswordField textoRepetirContrasenia;
     @FXML
     private Text textMensaje;
-    @FXML
-    private Button buttonRegistrar;
-    @FXML
-    private Button buttonVolverLogin;
-
-    @FXML
-    public void initialize() {
-        textMensaje.setText("");
-        textMensaje.setVisible(true);
-    }
 
     @FXML
     protected void onClickRegistrar() {
-        System.out.println("Botón 'Registrar' presionado");
-
-        textMensaje.setVisible(true);
-
         String usuario = textoUsuario.getText().trim();
-        String gmail = textoGmail.getText().trim();
-        String repetirGmail = textoRepetirGmail.getText().trim();
-        String contrasenia = textoContrasenia.getText().trim();
-        String repetirContrasenia = textoRepetirContrasenia.getText().trim();
+        String email = textoGmail.getText().trim();
+        String contraseña = textoContrasenia.getText().trim();
+        String repetirContraseña = textoRepetirContrasenia.getText().trim();
 
-        List<String> errores = new ArrayList<>();
-
-        if (usuario.isEmpty() || gmail.isEmpty() || repetirGmail.isEmpty() || contrasenia.isEmpty()
-                || repetirContrasenia.isEmpty()) {
-            errores.add("⚠️ Todos los campos son obligatorios.");
+        // Validaciones
+        if (usuario.isEmpty() || email.isEmpty() || contraseña.isEmpty() || repetirContraseña.isEmpty()) {
+            textMensaje.setText("⚠️ Todos los campos son obligatorios.");
+            textMensaje.setStyle("-fx-fill: red;");
+            textMensaje.setVisible(true);
+            return;
         }
-        if (!esGmailValido(gmail)) {
-            errores.add("⚠️ Ingrese un Gmail válido.");
-        }
-        if (!gmail.equals(repetirGmail)) {
-            errores.add("⚠️ Los correos no coinciden.");
-        }
-        if (usuario.equals(contrasenia)) {
-            errores.add("🚫 El usuario no puede ser igual a la contraseña.");
-        }
-        if (!contrasenia.equals(repetirContrasenia)) {
-            errores.add("⚠️ Las contraseñas no coinciden.");
-        }
-
-        if (!errores.isEmpty()) {
-            textMensaje.setText(String.join("\n", errores));
-            textMensaje.setStyle("-fx-text-fill: red;");
-            System.out.println("Errores detectados:\n" + String.join("\n", errores));
+        if (!contraseña.equals(repetirContraseña)) {
+            textMensaje.setText("⚠️ Las contraseñas no coinciden.");
+            textMensaje.setStyle("-fx-fill: red;");
+            textMensaje.setVisible(true);
             return;
         }
 
-        textMensaje.setText("✅ ¡Registro exitoso!");
-        textMensaje.setStyle("-fx-text-fill: green;");
-        System.out.println("Registro completado correctamente.");
-    }
+        // Guardar usuario en JSON
+        Usuario nuevoUsuario = new Usuario(usuario, email, contraseña);
+        boolean registrado = GestorUsuarios.agregarUsuario(nuevoUsuario);
 
-    private static final Pattern GMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@gmail\\.com$");
-
-    private boolean esGmailValido(String email) {
-        return GMAIL_PATTERN.matcher(email).matches();
+        if (registrado) {
+            textMensaje.setText("✅ Registro exitoso.");
+            textMensaje.setStyle("-fx-fill: green;");
+        } else {
+            textMensaje.setText("⚠️ Usuario ya registrado.");
+            textMensaje.setStyle("-fx-fill: red;");
+        }
+        textMensaje.setVisible(true);
     }
 
     @FXML
-    protected void onClickVolverLogin() {
+    private void onClickVolverLogin(ActionEvent event) {
         try {
-            Stage stage = (Stage) buttonVolverLogin.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("login.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 820, 640);
-            stage.setTitle("Pantalla Login");
+            System.out.println("Volviendo a la pantalla de login...");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
+            stage.setTitle("Login");
             stage.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.out.println("Error al volver a la pantalla de login: " + e.getMessage());
             e.printStackTrace();
         }
-
     }
 
 }

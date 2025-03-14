@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" prefHeight="321.0" prefWidth="245.0" spacing="15.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.RecuperarCuentaController">
+    <children>
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Restablecer Contraseña" />
+        
+        <!-- Campo de usuario -->
+        <TextField fx:id="campoUsuario" maxWidth="-Infinity" promptText="Usuario" />
+        
+        <PasswordField fx:id="nuevaContrasenia" maxWidth="-Infinity" promptText="Nueva Contraseña" />
+        <PasswordField fx:id="confirmarContrasenia" maxWidth="-Infinity" promptText="Confirmar Contraseña" />
+        
+        <!-- Mensaje de confirmación -->
+        <Text fx:id="mensajeCambio" style="-fx-fill: green;" text="" visible="false" />
+        
+        <Button fx:id="buttonCambiarContrasenia" onAction="#clickButtonCambiar" text="Cambiar Contraseña" />
+        <Button fx:id="buttonVolver" onAction="#clickButtonVolver" text="Volver" />
+    </children>
+</VBox>
