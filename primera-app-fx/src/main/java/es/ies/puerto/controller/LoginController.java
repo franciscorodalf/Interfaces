@@ -43,31 +43,32 @@ public class LoginController extends AbstractController {
     private ComboBox comboIdioma;
 
     @FXML
-protected void onLoginButtonClick() {
-    String usuario = textFieldUsuario.getText().trim();
-    String password = textFieldPassword.getText().trim();
-    Properties properties = getPropertiesIdioma();
+    protected void onLoginButtonClick() {
+        String usuario = textFieldUsuario.getText().trim();
+        String password = textFieldPassword.getText().trim();
+        Properties properties = getPropertiesIdioma();
 
-    if (usuario.isEmpty() || password.isEmpty()) {
-        textFieldMensaje.setText(properties.getProperty("login.mensaje.campos", "⚠️ Todos los campos son obligatorios."));
-        textFieldMensaje.setStyle("-fx-text-fill: red;");
+        if (usuario.isEmpty() || password.isEmpty()) {
+            textFieldMensaje
+                    .setText(properties.getProperty("login.mensaje.campos", "⚠️ Todos los campos son obligatorios."));
+            textFieldMensaje.setStyle("-fx-text-fill: red;");
+            textFieldMensaje.setVisible(true);
+            return;
+        }
+
+        if (GestorUsuarios.validarUsuario(usuario, password)) {
+            String mensaje = properties.getProperty("login.mensaje.bienvenido", "✅ Bienvenido.")
+                    .replace("{0}", usuario);
+            textFieldMensaje.setText(mensaje);
+            textFieldMensaje.setStyle("-fx-text-fill: green;");
+        } else {
+            textFieldMensaje
+                    .setText(properties.getProperty("login.mensaje.incorrecto", "❌ Usuario o contraseña incorrectos."));
+            textFieldMensaje.setStyle("-fx-text-fill: red;");
+        }
+
         textFieldMensaje.setVisible(true);
-        return;
     }
-
-    if (GestorUsuarios.validarUsuario(usuario, password)) {
-        String mensaje = properties.getProperty("login.mensaje.bienvenido", "✅ Bienvenido.")
-                                   .replace("{0}", usuario);
-        textFieldMensaje.setText(mensaje);
-        textFieldMensaje.setStyle("-fx-text-fill: green;");
-    } else {
-        textFieldMensaje.setText(properties.getProperty("login.mensaje.incorrecto", "❌ Usuario o contraseña incorrectos."));
-        textFieldMensaje.setStyle("-fx-text-fill: red;");
-    }
-
-    textFieldMensaje.setVisible(true);
-}
-
 
     @FXML
     protected void openRegistrarClick() {
@@ -98,8 +99,8 @@ protected void onLoginButtonClick() {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/recuperarContrasenia.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 500, 400);
             RecuperarContraseniaController controller = fxmlLoader.getController();
-            controller.setPropertiesIdioma(this.getPropertiesIdioma()); 
-            controller.postInitialize(); 
+            controller.setPropertiesIdioma(this.getPropertiesIdioma());
+            controller.postInitialize();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Recuperar Contraseña");
@@ -119,13 +120,23 @@ protected void onLoginButtonClick() {
         comboIdioma.getItems().addAll(idiomas);
     }
 
+    public void postInitialize() {
+        Properties properties = getPropertiesIdioma();
+        if (properties == null)
+            return;
+
+        textUsuario.setText(properties.getProperty("textUsuario", "Usuario"));
+        textContrasenia.setText(properties.getProperty("textContrasenia", "Contraseña"));
+        openRegistrarButton.setText(properties.getProperty("openRegistrarButton.text", "Registrarte"));
+        aceptarButton.setText(properties.getProperty("aceptarButton.text", "Aceptar"));
+        buttonRecuperarContraseña
+                .setText(properties.getProperty("buttonRecuperarContraseña.text", "¿Olvidaste tu contraseña?"));
+    }
+
     @FXML
     protected void cambiarIdioma() {
         setPropertiesIdioma(loadIdioma("idioma", comboIdioma.getValue().toString()));
-        textUsuario.setText(getPropertiesIdioma().getProperty("textUsuario"));
-        textContrasenia.setText(getPropertiesIdioma().getProperty("textContrasenia"));
-        openRegistrarButton.setText(getPropertiesIdioma().getProperty("openRegistrarButton.text"));
-        aceptarButton.setText(getPropertiesIdioma().getProperty("aceptarButton.text"));
-        buttonRecuperarContraseña.setText(getPropertiesIdioma().getProperty("buttonRecuperarContraseña.text"));
+        postInitialize();
     }
+
 }

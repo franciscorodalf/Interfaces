@@ -122,6 +122,9 @@ public class RecuperarCuentaController extends AbstractController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            LoginController loginController = fxmlLoader.getController();
+            loginController.setPropertiesIdioma(getPropertiesIdioma());
+            loginController.postInitialize(); 
             stage.setScene(scene);
             stage.setTitle("Login");
             stage.show();

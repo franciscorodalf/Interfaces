@@ -122,7 +122,9 @@ public class RecuperarContraseniaController extends AbstractController {
             System.out.println("Volviendo a la pantalla de login...");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-
+            LoginController loginController = fxmlLoader.getController();
+            loginController.setPropertiesIdioma(getPropertiesIdioma());
+            loginController.postInitialize(); 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Login");

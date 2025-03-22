@@ -43,14 +43,15 @@ public class RegistroController extends AbstractController {
     private Button buttonAceptar;
     @FXML
     private Text textoRepetirContraseniaRegister;
-    
 
     public void postInitialize() {
         Properties properties = getPropertiesIdioma();
+        textMensaje.setVisible(false);
         if (properties != null) {
             textUsuario.setText(properties.getProperty("textUsuario", "Usuario"));
             textContrasenia.setText(properties.getProperty("textContrasenia", "Contraseña"));
-            textoRepetirContraseniaRegister.setText(properties.getProperty("textoRepetirContraseniaRegister", "RepetirContraseña"));
+            textoRepetirContraseniaRegister
+                    .setText(properties.getProperty("textoRepetirContraseniaRegister", "RepetirContraseña"));
             buttonVolverLogin.setText(properties.getProperty("buttonVolverLogin.text", "Volver"));
             textoGmailRegister.setText(properties.getProperty("textoGmailRegister", "Gmail"));
             textoRepetirGmailRegister.setText(properties.getProperty("textoRepetirGmailRegister", "Repetir Gmail"));
@@ -62,31 +63,36 @@ public class RegistroController extends AbstractController {
     }
 
     @FXML
-protected void onClickRegistrar() {
-    String usuario = textoUsuario.getText().trim();
-    String email = textoGmail.getText().trim();
-    String contraseña = textoContrasenia.getText().trim();
-    String repetirContraseña = textoRepetirContrasenia.getText().trim();
-    Properties properties = getPropertiesIdioma();
+    protected void onClickRegistrar() {
+        String usuario = textoUsuario.getText().trim();
+        String email = textoGmail.getText().trim();
+        String contraseña = textoContrasenia.getText().trim();
+        String repetirContraseña = textoRepetirContrasenia.getText().trim();
+        Properties properties = getPropertiesIdioma();
 
-    if (usuario.isEmpty() || email.isEmpty() || contraseña.isEmpty() || repetirContraseña.isEmpty()) {
-        mostrarMensaje(properties.getProperty("registro.mensaje.campos", "⚠️ Todos los campos son obligatorios."), "red");
-        return;
+        if (usuario.isEmpty() || email.isEmpty() || contraseña.isEmpty() || repetirContraseña.isEmpty()) {
+            textMensaje.setVisible(true);
+            mostrarMensaje(properties.getProperty("registro.mensaje.campos", "⚠️ Todos los campos son obligatorios."),
+                    "red");
+            return;
+        }
+        if (!contraseña.equals(repetirContraseña)) {
+            textMensaje.setVisible(true);
+            mostrarMensaje(properties.getProperty("registro.mensaje.noCoinciden", "⚠️ Las contraseñas no coinciden."),
+                    "red");
+            return;
+        }
+
+        Usuario nuevoUsuario = new Usuario(usuario, email, contraseña);
+        boolean registrado = GestorUsuarios.agregarUsuario(nuevoUsuario);
+
+        if (registrado) {
+            textMensaje.setVisible(true);
+            mostrarMensaje(properties.getProperty("registro.mensaje.exito", "✅ Registro exitoso."), "green");
+        } else {
+            mostrarMensaje(properties.getProperty("registro.mensaje.repetido", "⚠️ Usuario ya registrado."), "red");
+        }
     }
-    if (!contraseña.equals(repetirContraseña)) {
-        mostrarMensaje(properties.getProperty("registro.mensaje.noCoinciden", "⚠️ Las contraseñas no coinciden."), "red");
-        return;
-    }
-    
-    Usuario nuevoUsuario = new Usuario(usuario, email, contraseña);
-    boolean registrado = GestorUsuarios.agregarUsuario(nuevoUsuario);
-    
-    if (registrado) {
-        mostrarMensaje(properties.getProperty("registro.mensaje.exito", "✅ Registro exitoso."), "green");
-    } else {
-        mostrarMensaje(properties.getProperty("registro.mensaje.repetido", "⚠️ Usuario ya registrado."), "red");
-    }    
-}
 
     private void mostrarMensaje(String mensaje, String color) {
         textMensaje.setText(mensaje);
@@ -100,7 +106,9 @@ protected void onClickRegistrar() {
             System.out.println("Volviendo a la pantalla de login...");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-
+            LoginController loginController = fxmlLoader.getController();
+            loginController.setPropertiesIdioma(getPropertiesIdioma());
+            loginController.postInitialize();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Login");
