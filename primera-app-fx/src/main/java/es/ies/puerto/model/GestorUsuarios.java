@@ -41,8 +41,8 @@ public class GestorUsuarios {
     public static boolean agregarUsuario(Usuario nuevoUsuario) {
         List<Usuario> usuarios = leerUsuarios();
 
-        for (Usuario u : usuarios) {
-            if (u.getUsuario().equals(nuevoUsuario.getUsuario())) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getUsuario().equals(nuevoUsuario.getUsuario())) {
                 System.out.println("⚠️ Usuario ya registrado.");
                 return false;
             }

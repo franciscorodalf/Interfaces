@@ -9,15 +9,15 @@
 
 <VBox alignment="CENTER" prefHeight="333.0" prefWidth="368.0" spacing="15.0" stylesheets="@../../../Css/buttonLoginAceptar.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.RecuperarContraseniaController">
     <children>
-        <Label prefHeight="23.0" prefWidth="176.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Recuperar Contraseña" />
-        <Text fill="WHITE" text="Ingrese su correo:" />
-        <TextField fx:id="textoCorreo" maxWidth="-Infinity" promptText="Correo electrónico" />
+        <Label fx:id="textoRecuperarContrasenia" prefHeight="23.0" prefWidth="176.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Recuperar Contraseña" />
+        <Text fx:id="textoIngresarGmail" fill="WHITE" text="Ingrese su correo:" />
+        <TextField fx:id="textoCorreo" maxWidth="-Infinity" />
 
         <Button fx:id="buttonRecuperar" onAction="#clickButtonRecuperar" text="Recuperar" />
         
         <Text fx:id="textoErrorContraseña" style="-fx-fill: red;" visible="false" />
 
-+        <Text fx:id="tickConfirmacion" style="-fx-fill: green; -fx-font-size: 18px;" text="✔️ Correo enviado" translateY="-14.0" visible="false" />
+       <Text fx:id="tickConfirmacion" style="-fx-fill: green; -fx-font-size: 18px;" text="✔️ Correo enviado" translateY="-14.0" visible="false" />
 
         <ProgressIndicator fx:id="loadingIndicator" translateY="-41.0" visible="false" />
         <Button fx:id="buttonVolver" onAction="#clickButtonVolver" text="Volver" translateY="-39.0" />

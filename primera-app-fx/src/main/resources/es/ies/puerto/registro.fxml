@@ -9,15 +9,15 @@
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="330.0" spacing="20.0" style="-fx-background-color: #ECF0F1;;" styleClass="panel" stylesheets="@../../../Css/buttonLoginAceptar.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.RegistroController">
    <children>
       <Button fx:id="buttonVolverLogin" mnemonicParsing="false" onAction="#onClickVolverLogin" text="Atras" translateX="-130.0" translateY="20.0" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
+      <Text fx:id="textUsuario" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
       <TextField fx:id="textoUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" stylesheets="@../../../Css/buttonLoginAceptar.css" />
-      <Text fx:id="textMensaje1" layoutX="213.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <Text fx:id="textContrasenia" layoutX="213.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
       <PasswordField fx:id="textoContrasenia" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" stylesheets="@../../../Css/buttonLoginAceptar.css" />
-      <Text fx:id="textMensaje2" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Password" />
+      <Text fx:id="textoRepetirContraseniaRegister" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Password" />
       <PasswordField fx:id="textoRepetirContrasenia" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" />
-      <Text fx:id="textMensaje21" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" />
+      <Text fx:id="textoGmailRegister" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" />
       <TextField fx:id="textoGmail" maxWidth="-Infinity" prefHeight="37.0" prefWidth="210.0" />
-      <Text fx:id="textMensaje211" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Email" />
+      <Text fx:id="textoRepetirGmailRegister" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Email" />
       <TextField fx:id="textoRepetirGmail" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="210.0" />
       <Text fx:id="textMensaje" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Button fx:id="buttonAceptar" mnemonicParsing="false" onAction="#onClickRegistrar" prefHeight="38.0" prefWidth="101.0" stylesheets="@../../../Css/buttonLoginAceptar.css" text="Aceptar" />

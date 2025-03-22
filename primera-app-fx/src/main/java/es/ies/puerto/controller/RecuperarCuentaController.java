@@ -1,7 +1,9 @@
 package es.ies.puerto.controller;
 
 import java.io.IOException;
+import java.util.Properties;
 
+import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.GestorUsuarios;
 import javafx.util.Duration;
 import javafx.animation.PauseTransition;
@@ -11,12 +13,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class RecuperarCuentaController {
+public class RecuperarCuentaController extends AbstractController {
 
     @FXML
     private PasswordField nuevaContrasenia;
@@ -26,24 +29,50 @@ public class RecuperarCuentaController {
     private Text mensajeCambio;
     @FXML
     private TextField campoUsuario;
+    @FXML
+    private Label textRestablecerContrasenia;
+    @FXML
+    private Text textUsuarioContrasenia;
+    @FXML
+    private Text textNuevaContrasenia;
+    @FXML
+    private Text textConfirmarContrasenia;
+    @FXML
+    private Button buttonCambiarContrasenia;
+
+    public void postInitialize() {
+        Properties properties = getPropertiesIdioma();
+        if (properties != null) {
+            textRestablecerContrasenia
+                    .setText(properties.getProperty("textRestablecerContrasenia", "Restablecer Contraseña"));
+            textUsuarioContrasenia.setText(properties.getProperty("textUsuarioContrasenia", "Usuario"));
+            textNuevaContrasenia.setText(properties.getProperty("textNuevaContrasenia", "Nueva Contraseña"));
+            textConfirmarContrasenia
+                    .setText(properties.getProperty("textConfirmarContrasenia", "Confirmar Contraseña"));
+            buttonCambiarContrasenia.setText(properties.getProperty("buttonCambiarContrasenia", "Cambiar Contraseña"));
+            buttonVolver.setText(properties.getProperty("buttonVolverCambiarContrasenia", "Volver"));
+        }
+    }
 
     @FXML
     private void clickButtonCambiar() {
         String nueva = nuevaContrasenia.getText().trim();
         String confirmar = confirmarContrasenia.getText().trim();
-        String usuario = campoUsuario.getText().trim(); 
+        String usuario = campoUsuario.getText().trim();
 
         mensajeCambio.setVisible(false);
+        Properties properties = getPropertiesIdioma();
 
         if (usuario.isEmpty() || nueva.isEmpty() || confirmar.isEmpty()) {
-            mensajeCambio.setText("⚠️ Rellene todos los campos.");
+            mensajeCambio.setText(properties.getProperty("cambiar.mensaje.vacio", "⚠️ Rellene todos los campos."));
             mensajeCambio.setStyle("-fx-fill: red;");
             mensajeCambio.setVisible(true);
             return;
         }
 
         if (!nueva.equals(confirmar)) {
-            mensajeCambio.setText("⚠️ Las contraseñas no coinciden.");
+            mensajeCambio
+                    .setText(properties.getProperty("cambiar.mensaje.noCoincide", "⚠️ Las contraseñas no coinciden."));
             mensajeCambio.setStyle("-fx-fill: red;");
             mensajeCambio.setVisible(true);
             return;
@@ -52,7 +81,7 @@ public class RecuperarCuentaController {
         boolean cambioExitoso = GestorUsuarios.actualizarContrasenia(usuario, nueva);
 
         if (cambioExitoso) {
-            mensajeCambio.setText("✅ Contraseña cambiada con éxito.");
+            mensajeCambio.setText(properties.getProperty("cambiar.mensaje.exito", "✅ Contraseña cambiada con éxito."));
             mensajeCambio.setStyle("-fx-fill: green;");
             mensajeCambio.setVisible(true);
 
@@ -60,7 +89,8 @@ public class RecuperarCuentaController {
             delay.setOnFinished(event -> volverALogin());
             delay.play();
         } else {
-            mensajeCambio.setText("❌ Usuario no encontrado.");
+            mensajeCambio
+                    .setText(properties.getProperty("cambiar.mensaje.usuarioNoExiste", "❌ Usuario no encontrado."));
             mensajeCambio.setStyle("-fx-fill: red;");
             mensajeCambio.setVisible(true);
         }
@@ -91,7 +121,6 @@ public class RecuperarCuentaController {
             System.out.println("Volviendo a la pantalla de login...");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Login");

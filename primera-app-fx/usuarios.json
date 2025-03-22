@@ -2,11 +2,16 @@
     {
         "usuario": "Pedro",
         "email": "hola@gmail.com",
-        "contraseña": "123"
+        "contraseña": "1234"
     },
     {
         "usuario": "Fran",
         "email": "ejemplo@gmail.com",
+        "contraseña": "hola"
+    },
+    {
+        "usuario": "Alvarillo",
+        "email": "alvaro@gmail.com",
         "contraseña": "hola"
     }
 ]

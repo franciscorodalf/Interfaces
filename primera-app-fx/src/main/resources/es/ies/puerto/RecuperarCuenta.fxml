@@ -7,14 +7,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="336.0" prefWidth="245.0" spacing="15.0" stylesheets="@../../../Css/buttonLoginAceptar.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.RecuperarCuentaController">
+<VBox alignment="CENTER" prefHeight="547.0" prefWidth="245.0" spacing="15.0" stylesheets="@../../../Css/buttonLoginAceptar.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.RecuperarCuentaController">
     <children>
-        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Restablecer Contraseña" />
+        <Label fx:id="textRestablecerContrasenia" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Restablecer Contraseña" />
+      <Text fx:id="textUsuarioContrasenia" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
         
-        <TextField fx:id="campoUsuario" maxWidth="-Infinity" promptText="Usuario" />
+        <TextField fx:id="campoUsuario" maxWidth="-Infinity" />
+      <Text fx:id="textNuevaContrasenia" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nueva Contraseña" />
         
-        <PasswordField fx:id="nuevaContrasenia" maxWidth="-Infinity" promptText="Nueva Contraseña" />
-        <PasswordField fx:id="confirmarContrasenia" maxWidth="-Infinity" promptText="Confirmar Contraseña" />
+        <PasswordField fx:id="nuevaContrasenia" maxWidth="-Infinity" />
+      <Text fx:id="textConfirmarContrasenia" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmar Contraseña" />
+        <PasswordField fx:id="confirmarContrasenia" maxWidth="-Infinity" />
         
         <Text fx:id="mensajeCambio" style="-fx-fill: green;" text="" visible="false" />
         
