@@ -19,6 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Controlador de la pestaña de recuperar-cuenta.fmxl
+ * 
+ * @author franciscorodalf
+ * @version 1.0.0
+ */
 public class RecuperarCuentaController extends AbstractController {
 
     @FXML
@@ -39,7 +45,13 @@ public class RecuperarCuentaController extends AbstractController {
     private Text textConfirmarContrasenia;
     @FXML
     private Button buttonCambiarContrasenia;
+    @FXML
+    private Button buttonVolver;
 
+    /**
+     * Método que aplica la traduccion de los textos de la pantalla de Recuperar
+     * Cuenta
+     */
     public void postInitialize() {
         Properties properties = getPropertiesIdioma();
         if (properties != null) {
@@ -54,6 +66,11 @@ public class RecuperarCuentaController extends AbstractController {
         }
     }
 
+    /**
+     * Método que se ejecuta cuando el usuario hace clic en "Cambiar Contraseña".
+     * Comprube que la inforamcion introducida por el usuario sea valida
+     * si todo está correcto, actualiza la contraseña.
+     */
     @FXML
     private void clickButtonCambiar() {
         String nueva = nuevaContrasenia.getText().trim();
@@ -96,6 +113,11 @@ public class RecuperarCuentaController extends AbstractController {
         }
     }
 
+    /**
+     * Metodo que se ejecuta cuando el usuario interactua con el botón de cambiar contraseña.
+     * Abre la pestaña de login, trasladando tambien la informacion del idioma
+     * seleccionado por el usuario.
+     */
     private void volverALogin() {
         try {
             System.out.println("Volviendo a la pantalla de login...");
@@ -111,10 +133,11 @@ public class RecuperarCuentaController extends AbstractController {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    private Button buttonVolver;
-
+ /**
+     * Metodo que se ejecuta cuando el usuario interactua con el botón de volver.
+     * Abre la pestaña de login, trasladando tambien la informacion del idioma
+     * seleccionado por el usuario.
+     */
     @FXML
     private void clickButtonVolver(ActionEvent event) {
         try {
@@ -124,7 +147,7 @@ public class RecuperarCuentaController extends AbstractController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             LoginController loginController = fxmlLoader.getController();
             loginController.setPropertiesIdioma(getPropertiesIdioma());
-            loginController.postInitialize(); 
+            loginController.postInitialize();
             stage.setScene(scene);
             stage.setTitle("Login");
             stage.show();

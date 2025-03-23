@@ -21,6 +21,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Controlador de la pestaña Login.
+ * 
+ * @author franciscorodalf
+ * @version 1.0.0
+ */
 public class LoginController extends AbstractController {
 
     @FXML
@@ -34,7 +40,7 @@ public class LoginController extends AbstractController {
     @FXML
     private Button openRegistrarButton;
     @FXML
-    private Button buttonRecuperarContraseña;
+    private Button buttonRecuperarContrasenia;
     @FXML
     private Text textUsuario;
     @FXML
@@ -42,11 +48,19 @@ public class LoginController extends AbstractController {
     @FXML
     private ComboBox comboIdioma;
 
+    /**
+     * Metodo que se ejecuta cuando el usuario interactua con el botón de login.
+     * Valida los datos introducidos y muestra mensaje segun el resultado.
+     */
     @FXML
     protected void onLoginButtonClick() {
         String usuario = textFieldUsuario.getText().trim();
         String password = textFieldPassword.getText().trim();
         Properties properties = getPropertiesIdioma();
+        if (properties == null) {
+            properties = loadIdioma("idioma", "es");
+            setPropertiesIdioma(properties);
+        }
 
         if (usuario.isEmpty() || password.isEmpty()) {
             textFieldMensaje
@@ -57,7 +71,7 @@ public class LoginController extends AbstractController {
         }
 
         if (GestorUsuarios.validarUsuario(usuario, password)) {
-            String mensaje = properties.getProperty("login.mensaje.bienvenido", "✅ Bienvenido.")
+            String mensaje = properties.getProperty("login.mensaje.bienvenido", "✅ Bienvenido, {0}")
                     .replace("{0}", usuario);
             textFieldMensaje.setText(mensaje);
             textFieldMensaje.setStyle("-fx-text-fill: green;");
@@ -70,6 +84,11 @@ public class LoginController extends AbstractController {
         textFieldMensaje.setVisible(true);
     }
 
+    /**
+     * Metodo que se ejecuta cuando el usuario interactua con el botón de registrar.
+     * Abre la pestaña de registrar, trasladando tambien la informacion del idioma
+     * seleccionado por el usuario.
+     */
     @FXML
     protected void openRegistrarClick() {
         try {
@@ -92,11 +111,17 @@ public class LoginController extends AbstractController {
 
     }
 
+    /**
+     * Metodo que se ejecuta cuando el usuario interactua con el botón de recuperar
+     * contraseña.
+     * Abre la pestaña de recuperar contraseña, trasladando tambien la informacion
+     * del idioma seleccionado por el usuario.
+     */
     @FXML
-    private void buttonRecuperarContraseñaClick(ActionEvent event) {
+    private void buttonRecuperarContraseniaClick(ActionEvent event) {
         try {
             System.out.println("Abriendo pantalla de recuperar contraseña...");
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/recuperarContrasenia.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/recuperar-contrasenia.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 500, 400);
             RecuperarContraseniaController controller = fxmlLoader.getController();
             controller.setPropertiesIdioma(this.getPropertiesIdioma());
@@ -111,6 +136,9 @@ public class LoginController extends AbstractController {
         }
     }
 
+    /**
+     * Carga los idiomas disponibles en la pestaña de login.
+     */
     @FXML
     public void initialize() {
         List<String> idiomas = new ArrayList<>();
@@ -120,6 +148,9 @@ public class LoginController extends AbstractController {
         comboIdioma.getItems().addAll(idiomas);
     }
 
+    /**
+     * Aplica la traduccion de los textos de la pantalla de login.
+     */
     public void postInitialize() {
         Properties properties = getPropertiesIdioma();
         if (properties == null)
@@ -129,10 +160,14 @@ public class LoginController extends AbstractController {
         textContrasenia.setText(properties.getProperty("textContrasenia", "Contraseña"));
         openRegistrarButton.setText(properties.getProperty("openRegistrarButton.text", "Registrarte"));
         aceptarButton.setText(properties.getProperty("aceptarButton.text", "Aceptar"));
-        buttonRecuperarContraseña
-                .setText(properties.getProperty("buttonRecuperarContraseña.text", "¿Olvidaste tu contraseña?"));
+        buttonRecuperarContrasenia
+                .setText(properties.getProperty("buttonRecuperarContrasenia.text", "¿Olvidaste tu contraseña?"));
     }
 
+    /**
+     * Método que cambia el idioma seleccionado por el usuario y actualiza los
+     * textos.
+     */
     @FXML
     protected void cambiarIdioma() {
         setPropertiesIdioma(loadIdioma("idioma", comboIdioma.getValue().toString()));

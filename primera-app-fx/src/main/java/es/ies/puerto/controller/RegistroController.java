@@ -18,6 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Controlador de la pestaña registro que verifica el registro del usuario.
+ * @author franciscorodalf
+ * @version 1.0.0
+ */
 public class RegistroController extends AbstractController {
     @FXML
     private TextField textoUsuario;
@@ -44,6 +49,10 @@ public class RegistroController extends AbstractController {
     @FXML
     private Text textoRepetirContraseniaRegister;
 
+    /**
+     * 
+     * Método que aplica la traduccion de los textos de la pantalla de Registro
+     */
     public void postInitialize() {
         Properties properties = getPropertiesIdioma();
         textMensaje.setVisible(false);
@@ -56,12 +65,13 @@ public class RegistroController extends AbstractController {
             textoGmailRegister.setText(properties.getProperty("textoGmailRegister", "Gmail"));
             textoRepetirGmailRegister.setText(properties.getProperty("textoRepetirGmailRegister", "Repetir Gmail"));
             buttonAceptar.setText(properties.getProperty("buttonAceptar.text", "Aceptar"));
-        } else {
-            textUsuario.setText("Usuario");
-            textContrasenia.setText("Contraseña");
         }
     }
 
+    /**
+     * Método que se ejecuta cuando el usuario interactua con el boton de Registrar.
+     * Verifica la informacion puesta por el usuario y la registra en el archivo JSON si es válido
+     */
     @FXML
     protected void onClickRegistrar() {
         String usuario = textoUsuario.getText().trim();
@@ -82,7 +92,6 @@ public class RegistroController extends AbstractController {
                     "red");
             return;
         }
-
         Usuario nuevoUsuario = new Usuario(usuario, email, contraseña);
         boolean registrado = GestorUsuarios.agregarUsuario(nuevoUsuario);
 
@@ -93,13 +102,21 @@ public class RegistroController extends AbstractController {
             mostrarMensaje(properties.getProperty("registro.mensaje.repetido", "⚠️ Usuario ya registrado."), "red");
         }
     }
-
+    /**
+     * Método que muestra el mensaje en la interfaz del color especificado.
+     * @param mensaje que se quiere mostrar en la interfaz
+     * @param color del mensaje
+     */
     private void mostrarMensaje(String mensaje, String color) {
         textMensaje.setText(mensaje);
         textMensaje.setStyle("-fx-fill: " + color + ";");
         textMensaje.setVisible(true);
     }
 
+      /**
+     * Evento que se ejecuta al hacer clic en el botón "Volver".
+     * Carga la pantalla de login conservando el idioma actual.
+     */
     @FXML
     private void onClickVolverLogin(ActionEvent event) {
         try {

@@ -13,14 +13,18 @@ import javafx.scene.text.Text;
 import javafx.scene.control.ProgressIndicator;
 import javafx.event.ActionEvent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 
 import es.ies.puerto.controller.abstractas.AbstractController;
 import javafx.util.Duration;
 
+/**
+ * Controlador de la pestaña de recuperar-contrasenia.fxml
+ * 
+ * @author franciscorodalf
+ * @version 1.0.0
+ */
 public class RecuperarContraseniaController extends AbstractController {
 
     @FXML
@@ -40,8 +44,16 @@ public class RecuperarContraseniaController extends AbstractController {
     @FXML
     private Button buttonVolver;
 
+    /**
+     * Patrón para verificar si el formato del correo que ha insertado el usuario es
+     * válido.
+     */
     private static final Pattern GMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@gmail\\.com$");
 
+    /**
+     * Método que aplica la traduccion de los textos de la pantalla de Recuperar
+     * Contraseña.
+     */
     public void postInitialize() {
         Properties properties = getPropertiesIdioma();
         if (properties != null) {
@@ -53,6 +65,9 @@ public class RecuperarContraseniaController extends AbstractController {
         }
     }
 
+    /**
+     * Método que oculta los indicadores y textos
+     */
     @FXML
     public void textoInvicible() {
         textoErrorContraseña.setVisible(false);
@@ -60,14 +75,26 @@ public class RecuperarContraseniaController extends AbstractController {
         loadingIndicator.setVisible(false);
     }
 
+    /**
+     * Método que se ejecuta cuando el usuario presiona el botón de recuperar.
+     * Verifica si el correo esta vacio y si el patron de gmail coincide con el
+     * correo que ha insertado el usuario.
+     * Si todo esta correcto, envia un mensaje a la interfaz confirmando que el
+     * proceso se ha hecho correctamente y
+     * redirige a la pantalla de Login tras 4 segundos.
+     */
     @FXML
     private void clickButtonRecuperar() {
         String correo = textoCorreo.getText().trim();
-        Properties properties = getPropertiesIdioma();
-
+        
         textoErrorContraseña.setVisible(false);
         tickConfirmacion.setVisible(false);
         loadingIndicator.setVisible(false);
+        
+        if (getPropertiesIdioma() == null) {
+            setPropertiesIdioma(loadIdioma("idioma", "es")); 
+        }
+        Properties properties = getPropertiesIdioma();
 
         if (correo.isEmpty()) {
             textoErrorContraseña.setText(
@@ -96,10 +123,15 @@ public class RecuperarContraseniaController extends AbstractController {
         delay.setOnFinished(event -> redirigirARecuperacion());
         delay.play();
     }
+
+    /**
+     * Cambia a la pantalla para introducir nueva contraseña.
+     * También pasa el idioma seleccionado.
+     */
     private void redirigirARecuperacion() {
         try {
-            System.out.println("Redirigiendo a la pantalla de recuperación de cuenta...");
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/recuperarCuenta.fxml"));
+            System.out.println("Redirigiendo a la pantalla de recuperación de cuenta");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/es/ies/puerto/recuperar-cuenta.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
     
             RecuperarCuentaController controller = fxmlLoader.getController(); 
@@ -116,6 +148,10 @@ public class RecuperarContraseniaController extends AbstractController {
         }
     }
     
+   /**
+     * Metodo que se ejecuta cuando el usuario interactua con el botón de volver
+     * Abre la pestaña de login, trasladando tambien la informacion del idioma seleccionado por el usuario.
+     */
     @FXML
     private void clickButtonVolver(ActionEvent event) {
         try {
@@ -124,7 +160,7 @@ public class RecuperarContraseniaController extends AbstractController {
             Scene scene = new Scene(fxmlLoader.load());
             LoginController loginController = fxmlLoader.getController();
             loginController.setPropertiesIdioma(getPropertiesIdioma());
-            loginController.postInitialize(); 
+            loginController.postInitialize();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.setTitle("Login");

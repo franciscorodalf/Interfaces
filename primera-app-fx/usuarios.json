@@ -13,5 +13,10 @@
         "usuario": "Alvarillo",
         "email": "alvaro@gmail.com",
         "contraseña": "hola"
+    },
+    {
+        "usuario": "Francisco",
+        "email": "fran@gmail.com",
+        "contraseña": "hola123"
     }
 ]

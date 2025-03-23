@@ -1,25 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Importación de los componentes JavaFX necesarios -->
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="330.0" spacing="20.0" style="-fx-background-color: #ECF0F1;;" styleClass="panel" stylesheets="@../../../Css/buttonLoginAceptar.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.RegistroController">
+<!-- Interfaz para el registro de usuarios. -->
+<VBox alignment="CENTER"
+      maxHeight="-Infinity"
+      maxWidth="-Infinity"
+      minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="648.0"
+      prefWidth="330.0"
+      spacing="20.0"
+      style="-fx-background-color: #ECF0F1;;" 
+      styleClass="panel"
+      stylesheets="@../../../css/style.css"
+      xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="es.ies.puerto.controller.RegistroController">
+
    <children>
-      <Button fx:id="buttonVolverLogin" mnemonicParsing="false" onAction="#onClickVolverLogin" text="Atras" translateX="-130.0" translateY="20.0" />
-      <Text fx:id="textUsuario" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
-      <TextField fx:id="textoUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" stylesheets="@../../../Css/buttonLoginAceptar.css" />
-      <Text fx:id="textContrasenia" layoutX="213.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <PasswordField fx:id="textoContrasenia" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" stylesheets="@../../../Css/buttonLoginAceptar.css" />
-      <Text fx:id="textoRepetirContraseniaRegister" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Password" />
-      <PasswordField fx:id="textoRepetirContrasenia" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="210.0" />
-      <Text fx:id="textoGmailRegister" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" />
-      <TextField fx:id="textoGmail" maxWidth="-Infinity" prefHeight="37.0" prefWidth="210.0" />
-      <Text fx:id="textoRepetirGmailRegister" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Email" />
-      <TextField fx:id="textoRepetirGmail" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="0.0" prefWidth="210.0" />
-      <Text fx:id="textMensaje" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Button fx:id="buttonAceptar" mnemonicParsing="false" onAction="#onClickRegistrar" prefHeight="38.0" prefWidth="101.0" stylesheets="@../../../Css/buttonLoginAceptar.css" text="Aceptar" />
+
+      <!-- Botón para volver a la pantalla de login -->
+      <Button fx:id="buttonVolverLogin"
+              onAction="#onClickVolverLogin"
+              text="Atras"
+              translateX="-130.0"
+              translateY="20.0" />
+
+      <!-- Texto y campo para el nombre de usuario -->
+      <Text fx:id="textUsuario" text="Usuario" />
+      <TextField fx:id="textoUsuario"
+                 prefHeight="26.0"
+                 prefWidth="210.0"
+                 stylesheets="@../../../Css/buttonLoginAceptar.css" />
+
+      <!-- Texto y campo para contraseña -->
+      <Text fx:id="textContrasenia" text="Password" />
+      <PasswordField fx:id="textoContrasenia"
+                     prefHeight="26.0"
+                     prefWidth="210.0"
+                     stylesheets="@../../../Css/buttonLoginAceptar.css" />
+
+      <!-- Texto y campo para repetir contraseña -->
+      <Text fx:id="textoRepetirContraseniaRegister" text="Repetir Password" />
+      <PasswordField fx:id="textoRepetirContrasenia"
+                     prefHeight="26.0"
+                     prefWidth="210.0" />
+
+      <!-- Texto y campo para correo electrónico -->
+      <Text fx:id="textoGmailRegister" text="Gmail" />
+      <TextField fx:id="textoGmail"
+                 prefHeight="37.0"
+                 prefWidth="210.0" />
+
+      <!-- Texto y campo para repetir correo electrónico -->
+      <Text fx:id="textoRepetirGmailRegister" text="Repetir Email" />
+      <TextField fx:id="textoRepetirGmail"
+                 prefHeight="0.0"
+                 prefWidth="210.0" />
+
+      <!-- Texto para mostrar mensajes de error o éxito -->
+      <Text fx:id="textMensaje" text="Text" />
+
+      <!-- Botón para enviar el formulario de registro -->
+      <Button fx:id="buttonAceptar"
+              onAction="#onClickRegistrar"
+              prefHeight="38.0"
+              prefWidth="101.0"
+              stylesheets="@../../../Css/buttonLoginAceptar.css"
+              text="Aceptar" />
    </children>
 </VBox>
