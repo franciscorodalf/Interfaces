@@ -8,6 +8,8 @@ import java.util.Properties;
 import es.ies.puerto.PrincipalApplication;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.GestorUsuarios;
+import es.ies.puerto.model.Usuario;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +19,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Controlador de la pestaña Login.
@@ -47,6 +51,8 @@ public class LoginController extends AbstractController {
     private Text textContrasenia;
     @FXML
     private ComboBox comboIdioma;
+    @FXML
+    private ProgressIndicator loadingIndicator;
 
     /**
      * Metodo que se ejecuta cuando el usuario interactua con el botón de login.
@@ -61,26 +67,50 @@ public class LoginController extends AbstractController {
             properties = loadIdioma("idioma", "es");
             setPropertiesIdioma(properties);
         }
-
+    
         if (usuario.isEmpty() || password.isEmpty()) {
-            textFieldMensaje
-                    .setText(properties.getProperty("login.mensaje.campos", "⚠️ Todos los campos son obligatorios."));
-            textFieldMensaje.setStyle("-fx-text-fill: red;");
-            textFieldMensaje.setVisible(true);
+            mostrarMensaje(properties.getProperty("login.mensaje.campos", "⚠️ Todos los campos son obligatorios."), "red");
             return;
         }
-
-        if (GestorUsuarios.validarUsuario(usuario, password)) {
-            String mensaje = properties.getProperty("login.mensaje.bienvenido", "✅ Bienvenido, {0}")
-                    .replace("{0}", usuario);
-            textFieldMensaje.setText(mensaje);
-            textFieldMensaje.setStyle("-fx-text-fill: green;");
-        } else {
-            textFieldMensaje
-                    .setText(properties.getProperty("login.mensaje.incorrecto", "❌ Usuario o contraseña incorrectos."));
-            textFieldMensaje.setStyle("-fx-text-fill: red;");
+    
+        boolean esValido = GestorUsuarios.validarUsuario(usuario, password);
+    
+        if (!esValido) {
+            mostrarMensaje(properties.getProperty("login.mensaje.incorrecto", "❌ Usuario o contraseña incorrectos."), "red");
+            return;
         }
+    
+        mostrarMensaje("✅ Bienvenido, " + usuario, "green");
+    
+        // Mostrar el indicador de carga
+        loadingIndicator.setVisible(true);
+    
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(event -> {
+            Usuario usuarioObj = GestorUsuarios.obtenerUsuario(usuario);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/ies/puerto/mostrar-informacion.fxml"));
+                Scene scene = new Scene(loader.load());
+    
+                mostrarinformacionController controller = loader.getController();
+                controller.mostrarInformacionUsuario(usuarioObj);
+    
+                Stage stage = (Stage) textFieldUsuario.getScene().getWindow();
+                stage.setScene(scene);
+                stage.setTitle("Información del Usuario");
+                stage.show();
+    
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        delay.play();
+    }
+    
 
+    private void mostrarMensaje(String mensaje, String color) {
+        textFieldMensaje.setText(mensaje);
+        textFieldMensaje.setStyle("-fx-text-fill: " + color + ";");
         textFieldMensaje.setVisible(true);
     }
 
@@ -92,13 +122,16 @@ public class LoginController extends AbstractController {
     @FXML
     protected void openRegistrarClick() {
         try {
-
+            Properties properties = getPropertiesIdioma();
+            if (properties == null) {
+                properties = loadIdioma("idioma", "es");
+                setPropertiesIdioma(properties);
+            }
             FXMLLoader loader = new FXMLLoader(PrincipalApplication.class.getResource("registro.fxml"));
             Parent root = loader.load();
 
             RegistroController registroController = loader.getController();
             registroController.setPropertiesIdioma(this.getPropertiesIdioma());
-
             registroController.postInitialize();
 
             Stage stage = (Stage) textFieldUsuario.getScene().getWindow();
@@ -172,6 +205,11 @@ public class LoginController extends AbstractController {
     protected void cambiarIdioma() {
         setPropertiesIdioma(loadIdioma("idioma", comboIdioma.getValue().toString()));
         postInitialize();
+        Object idiomaSeleccionado = comboIdioma.getValue();
+        if (idiomaSeleccionado != null) {
+            setPropertiesIdioma(loadIdioma("idioma", idiomaSeleccionado.toString()));
+            postInitialize();
+        }
     }
 
 }

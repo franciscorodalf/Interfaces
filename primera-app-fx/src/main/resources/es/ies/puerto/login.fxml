@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -11,12 +12,8 @@
 <?import javafx.scene.text.Text?>
 
 <!-- Contenedor principal -->
-<VBox alignment="TOP_CENTER" prefHeight="533.0" prefWidth="346.0" spacing="20.0"
-      style="-fx-background-color: #2C3E50;"
-      stylesheets="@../../../css/style.css"
-      xmlns="http://javafx.com/javafx/23.0.1"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="es.ies.puerto.controller.LoginController">
+
+<VBox alignment="TOP_CENTER" prefHeight="533.0" prefWidth="346.0" spacing="20.0" style="-fx-background-color: #2C3E50;" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.LoginController">
 
     <!-- Margen interior del VBox -->
     <padding>
@@ -30,12 +27,7 @@
             <ComboBox fx:id="comboIdioma" onAction="#cambiarIdioma" prefWidth="150.0" promptText="Idioma" />
 
             <!-- Botón para cambiar a la pantalla de registro -->
-            <Button fx:id="openRegistrarButton"
-                    prefHeight="36.0" prefWidth="98.0"
-                    style="-fx-background-color: #3498DB;"
-                    onAction="#openRegistrarClick"
-                    text="Registrarte"
-                    translateX="32.0" />
+            <Button fx:id="openRegistrarButton" onAction="#openRegistrarClick" prefHeight="36.0" prefWidth="98.0" style="-fx-background-color: #3498DB;" text="Registrarte" translateX="32.0" />
         </children>
     </TilePane>
 
@@ -60,13 +52,10 @@
 
     <!-- Campo de contraseña -->
     <PasswordField fx:id="textFieldPassword" prefHeight="26.0" prefWidth="210.0" />
+<ProgressIndicator fx:id="loadingIndicator" visible="false" />
 
     <!-- Botón para iniciar sesión -->
-    <Button fx:id="aceptarButton"
-            onAction="#onLoginButtonClick"
-            prefHeight="36.0" prefWidth="160.0"
-            style="-fx-background-color: #3498DB;"
-            text="Aceptar">
+    <Button fx:id="aceptarButton" onAction="#onLoginButtonClick" prefHeight="36.0" prefWidth="160.0" style="-fx-background-color: #3498DB;" text="Aceptar">
         <font>
             <Font size="14.0" />
         </font>
@@ -80,7 +69,5 @@
     </Text>
 
     <!-- Boton para recuperar contraseña -->
-    <Button fx:id="buttonRecuperarContrasenia"
-            onAction="#buttonRecuperarContraseniaClick"
-            text="¿Olvidaste tu contraseña?" />
+    <Button fx:id="buttonRecuperarContrasenia" onAction="#buttonRecuperarContraseniaClick" text="¿Olvidaste tu contraseña?" />
 </VBox>

@@ -2,21 +2,6 @@
     {
         "usuario": "Pedro",
         "email": "hola@gmail.com",
-        "contraseña": "1234"
-    },
-    {
-        "usuario": "Fran",
-        "email": "ejemplo@gmail.com",
         "contraseña": "hola"
-    },
-    {
-        "usuario": "Alvarillo",
-        "email": "alvaro@gmail.com",
-        "contraseña": "hola"
-    },
-    {
-        "usuario": "Francisco",
-        "email": "fran@gmail.com",
-        "contraseña": "hola123"
     }
 ]

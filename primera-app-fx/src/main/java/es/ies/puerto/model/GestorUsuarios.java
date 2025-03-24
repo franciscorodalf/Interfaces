@@ -75,4 +75,15 @@ public class GestorUsuarios {
         return false;
     }
 
+    public static Usuario obtenerUsuario(String nombreUsuario) {
+        List<Usuario> usuarios = leerUsuarios();
+        for (Usuario u : usuarios) {
+            if (u.getUsuario().equals(nombreUsuario)) {
+                return u;
+            }
+        }
+        return null;
+    }
+    
+
 }
