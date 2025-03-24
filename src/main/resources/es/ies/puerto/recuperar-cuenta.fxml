@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<!-- Vista de la pantalla para restablecer la contraseña. -->
+<VBox alignment="CENTER"
+      prefHeight="547.0"
+      prefWidth="245.0"
+      spacing="15.0"
+      stylesheets="@../../../css/style.css"
+      xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="es.ies.puerto.controller.RecuperarCuentaController">
+
+    <children>
+
+        <!-- Título de la ventana -->
+        <Label fx:id="textRestablecerContrasenia"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;"
+               text="Restablecer Contraseña" />
+
+        <!-- Texto para el campo de usuario -->
+        <Text fx:id="textUsuarioContrasenia"
+              fill="WHITE"
+              text="Usuario" />
+
+        <!-- Campo de entrada para el usuario -->
+        <TextField fx:id="campoUsuario"
+                   maxWidth="-Infinity" />
+
+        <!-- Etiqueta para nueva contraseña -->
+        <Text fx:id="textNuevaContrasenia"
+              fill="WHITE"
+              text="Nueva Contraseña" />
+
+        <!-- Campo para nueva contraseña -->
+        <PasswordField fx:id="nuevaContrasenia"
+                       maxWidth="-Infinity" />
+
+        <!-- Texto para confirmar contraseña -->
+        <Text fx:id="textConfirmarContrasenia"
+              fill="WHITE"
+              text="Confirmar Contraseña" />
+
+        <!-- Campo para confirmar contraseña -->
+        <PasswordField fx:id="confirmarContrasenia"
+                       maxWidth="-Infinity" />
+
+        <!-- Texto para mostrar mensajes de éxito o error -->
+        <Text fx:id="mensajeCambio"
+              style="-fx-fill: green;"
+              text=""
+              visible="false" />
+
+        <!-- Botón para cambiar la contraseña -->
+        <Button fx:id="buttonCambiarContrasenia"
+                onAction="#clickButtonCambiar"
+                text="Cambiar Contraseña" />
+
+        <!-- Botón para volver al login -->
+        <Button fx:id="buttonVolver"
+                onAction="#clickButtonVolver"
+                text="Volver" />
+    </children>
+</VBox>
+
